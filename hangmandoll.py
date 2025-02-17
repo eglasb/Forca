@@ -10,15 +10,22 @@ class HangmanDoll:
             0: "desenho com 6 vidas",
         }
 
-    def draw_hangman(self, lifes:int):
+    def draw_hangman(self, lifes: int):
         print(self.drawings[lifes])
         print(
             """ 
-                ___ 
-               |   |
-                ---
-                 |
-               -----
-              /     \\
+                ________
+                |/     |
+                |     ___  
+                |    |ó,ò|  
+                |    \_-_/  
+                |      |    
+                |    --|--  
+                |      |    
+                |     / \  
+                |    /   \  
+                |  
+              __|____________
+              |             |
             """
         )
