@@ -2,6 +2,7 @@ import random
 from hangmandoll import HangmanDoll
 from player import Player
 from letterstate import LetterState
+from secretword import SecretWord
 
 
 class Game:
@@ -10,8 +11,8 @@ class Game:
         self.hangman_doll: HangmanDoll = HangmanDoll()
         self.available_words = available_words
         self.played_words: list[str] = []
-        self.chosen_word_by_letter_and_state:list
         self.victories: int = 0
+        self.secret_word: SecretWord
 
     # Só para testes
     def testa_player(self) -> None:
@@ -22,34 +23,24 @@ class Game:
     def begin_game(self) -> None:
         print("Olá! vamos jogar FORCA?")
         self.player = Player(self.get_name())
-        self.chosen_word_by_letter_and_state = self.get_random_word()
+        self.secret_word = self.get_secret_word()
         print(f"Ok {self.player.name}, vamos começar!!")
-        while self.player.lifes > 0:  # incluir OR palavra descoberta
-            self.next_turn(self.player, self.hangman_doll)
+        while self.player.lifes > 0 and self.secret_word.discovered == False:
+            self.next_turn(self.player, self.hangman_doll, self.secret_word)
             self.player.lifes = 0  # para evitar loop infinito por enquanto
+        self.end_game()
 
-    def next_turn(self, player: "Player", hangman_doll: "HangmanDoll"):
+    def next_turn(self, player: "Player", hangman_doll: "HangmanDoll", secret_word:"SecretWord"):
         hangman_doll.draw_hangman(player.lifes)
-        self.print_secret_word()
+        print(secret_word)
         print(player.choose_letter())
 
     def get_name(self) -> str:
         return input("Qual o seu nome? ")
 
-    def get_random_word(self) -> list[list]:
+    def get_secret_word(self) -> SecretWord:
         print("Sorteando palavra! **BZZZZ BZZZZ BZZZZ**")
-        random_word = random.choice(self.available_words)
-        letters_and_state: list[list] = [
-            [letter, LetterState.HIDDEN] for letter in random_word
-        ]
-        return letters_and_state
-
-    def print_secret_word(self) -> None:
-        word_print:str = ""
-        print(self.chosen_word_by_letter_and_state)  # só de teste
-        for letter_state in self.chosen_word_by_letter_and_state:
-            if letter_state[1] == LetterState.REVEALED:
-                word_print += letter_state[0]
-            else:
-                word_print += "_"
-        print(word_print)
+        return SecretWord(random.choice(self.available_words))
+    
+    def end_game(self):
+        pass
