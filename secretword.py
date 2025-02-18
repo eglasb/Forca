@@ -24,16 +24,11 @@ class SecretWord:
             if chosen_letter == letter[0]:
                 letter[1] = LetterState.REVEALED
                 player_discovered_letter = True
-        for letter in self.chosen_word_by_letter_and_state:
-            if all(
-                letter[1] == LetterState.REVEALED
-                for letter in self.chosen_word_by_letter_and_state
-            ):
-                self.discovered = True
+        self.discovered = all(
+            letter[1] == LetterState.REVEALED
+            for letter in self.chosen_word_by_letter_and_state
+        )
         return player_discovered_letter
-
-        print(self.discovered)
-        print(self.chosen_word_by_letter_and_state)
 
     def check_if_discovered(self):
         pass
