@@ -37,8 +37,11 @@ class Game:
     ):
         hangman_doll.draw_hangman(player.lifes)
         print(secret_word)
-        secret_word.update_state(player.choose_letter())
-        
+        if secret_word.update_state(player.choose_letter()) == False:
+            print("Você errou e perdeu uma vida!")
+            player.loose_life()
+        else:
+            print("Você acertou uma letra!")
 
     def get_name(self) -> str:
         return input("Qual o seu nome? ").strip().title()

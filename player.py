@@ -9,8 +9,9 @@ class Player:
         self.letters: tuple = ("A", "B", "C", "D", "E", "F", "G", "H", "I", "J", "K",
                                 "L", "M", "N", "O", "P", "Q", "R", "S", "T", "U", "V",
                                 "W", "X", "Y", "Z")  # fmt: on
-        self.played_letters: list = ["W", "X", "Y"]
+        self.played_letters: list = []
         self.chosen_letter: str = ""
+        self.alive: bool = True
 
     def __repr__(self) -> str:
         return f"Player: {self.name} has {self.lifes} lifes."
@@ -28,4 +29,10 @@ class Player:
                 chosen_letter not in self.played_letters
                 and chosen_letter in self.letters
             ):
+                self.played_letters.append(chosen_letter)
                 return chosen_letter
+
+    def loose_life(self):
+        self.lifes -= 1
+        if self.lifes == 0:
+            self.alive = False
