@@ -25,22 +25,27 @@ class Game:
         self.player = Player(self.get_name())
         self.secret_word = self.get_secret_word()
         print(f"Ok {self.player.name}, vamos começar!!")
-        while self.player.lifes > 0 and self.secret_word.discovered == False:
+        while (
+            self.player.lifes > 0 and self.secret_word.discovered == False
+        ):  # talvez trocar para get_secretword.doscovered == False
             self.next_turn(self.player, self.hangman_doll, self.secret_word)
-            self.player.lifes = 0  # para evitar loop infinito por enquanto
+            # self.player.lifes = 0  # para evitar loop infinito por enquanto
         self.end_game()
 
-    def next_turn(self, player: "Player", hangman_doll: "HangmanDoll", secret_word:"SecretWord"):
+    def next_turn(
+        self, player: "Player", hangman_doll: "HangmanDoll", secret_word: "SecretWord"
+    ):
         hangman_doll.draw_hangman(player.lifes)
         print(secret_word)
-        print(player.choose_letter())
+        secret_word.update_state(player.choose_letter())
+        
 
     def get_name(self) -> str:
-        return input("Qual o seu nome? ")
+        return input("Qual o seu nome? ").strip().title()
 
     def get_secret_word(self) -> SecretWord:
         print("Sorteando palavra! **BZZZZ BZZZZ BZZZZ**")
         return SecretWord(random.choice(self.available_words))
-    
+
     def end_game(self):
         pass
