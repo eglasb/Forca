@@ -1,6 +1,21 @@
 class HangmanDoll:
     def __init__(self) -> None:
         self.drawings: dict[int, str] = {
+            7: r""" 
+                ________
+                |/     |
+                |
+                |
+                |     ___  
+                |    |ó ò|  
+                |    \_v_/  
+                |    \ | / 
+                |     \|/  
+                |      |     
+                |     / \  
+              __|____/___\___
+              |             |
+            """,
             6: r""" 
                 ________
                 |/     |
