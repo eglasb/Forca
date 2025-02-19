@@ -1,5 +1,5 @@
 import random
-
+from utils import remove_accents
 
 class Player:
     # fmt: off
@@ -18,7 +18,7 @@ class Player:
         return f"Player: {self.name} has {self.lifes} lifes."
 
     def choose_letter(self) -> str:
-        chosen_letter = input("Escolha uma letra: ").upper().strip()
+        chosen_letter = remove_accents(input("Escolha uma letra: ").upper().strip())
         while True:
             if chosen_letter in self.played_letters:
                 print(f'Você já tentou a letra "{chosen_letter}"!')
