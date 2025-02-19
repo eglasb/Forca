@@ -84,3 +84,4 @@ class Game:
                 parting_text += f"ganhou {self.victories} jogos"
             print(parting_text)
             print(f"Até a próxima, {self.player.name}")
+            input("Pressione ENTER para sair...")
