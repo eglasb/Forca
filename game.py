@@ -3,18 +3,17 @@ from hangmandoll import HangmanDoll
 from player import Player
 from letterstate import LetterState
 from secretword import SecretWord
-from utils import get_clean_answer
+from utils import get_clean_answer, read_words_file
 
 
 class Game:
-    def __init__(self, available_words: tuple[str, ...]) -> None:
+    def __init__(self) -> None:
         self.player: Player
         self.hangman_doll: HangmanDoll = HangmanDoll()
-        self.available_words = available_words
         self.played_words: list[str] = []
         self.victories: int = 0
         self.games_played: int = 0
-        self.secret_word: SecretWord = SecretWord()
+        self.secret_word: SecretWord = SecretWord(read_words_file())
 
     # Só para testes
     def testa_player(self) -> None:
@@ -35,7 +34,6 @@ class Game:
             print(f"Jogo: {self.games_played}, Vitórias: {self.victories}")
             self.player.reset_state()
             self.secret_word.reset_state()
-
         self.secret_word.choose_secret_word()
         print(f"Ok {self.player.name}, vamos lá!!")
         while self.player.lifes > 0 and self.secret_word.discovered == False:
@@ -51,7 +49,7 @@ class Game:
             for _ in range(30):
                 print("\n")
             print("Você errou e perdeu uma vida!")
-            player.loose_life()
+            player.lose_life()
         else:
             for _ in range(30):
                 print("\n")

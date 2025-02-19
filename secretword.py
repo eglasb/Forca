@@ -1,61 +1,11 @@
 from letterstate import LetterState
 import random
+from utils import remove_accents
 
 
 class SecretWord:
-    def __init__(self) -> None:
-        self.available_words: tuple[str, ...] = (
-            "cobra",
-            "aguia",
-            "cavalo",
-            "marinho",
-            "chimpanze",
-            "escorpiao",
-            "dromedário",
-            "hipopótamo",
-            "tartaruga",
-            "formiga",
-            "crocodilo",
-            "pinguim",
-            "pulga",
-            "gaivota",
-            "baleia",
-            "barata",
-            "girafa",
-            "gorila",
-            "serpente",
-            "mosca",
-            "mosquito",
-            "zebra",
-            "onça",
-            "tigre",
-            "borboleta",
-            "camaleão",
-            "capivara",
-            "beija",
-            "flor",
-            "aranha",
-            "boto",
-            "jiboia",
-            "jacare",
-            "foca",
-            "besouro",
-            "sapo",
-            "tatu",
-            "panda",
-            "sardinha",
-            "peixe",
-            "polvo",
-            "rinoceronte",
-            "hiena",
-            "rouxinol",
-            "andorinha",
-            "abutre",
-            "gaviao",
-            "corvo",
-            "falcao",
-            "condor",
-        )  # , "novamente", "espirro")
+    def __init__(self, available_words: tuple[str, ...]) -> None:
+        self.available_words = available_words
         self.chosen_word_by_letter_and_state: list[list]
         self.chosen_words: list[str] = []
         self.discovered: bool = False
@@ -63,7 +13,7 @@ class SecretWord:
     def __str__(self) -> str:
         word_print: str = ""
         for letter_state in self.chosen_word_by_letter_and_state:
-            if letter_state[1] == LetterState.REVEALED:
+            if letter_state[2] == LetterState.REVEALED:
                 word_print += letter_state[0]
             else:
                 word_print += "_"
@@ -82,20 +32,21 @@ class SecretWord:
             print(f"ERRO: Acabaram as palavras! Resetando lista de palavras!")
             self.chosen_words = []
         self.chosen_word_by_letter_and_state = [
-            [letter, LetterState.HIDDEN] for letter in self.chosen_words[-1]
+            [letter, remove_accents(letter), LetterState.HIDDEN]
+            for letter in self.chosen_words[-1]
         ]
+        for letter in self.chosen_word_by_letter_and_state:
+            if letter[0]=="-":
+                letter[2]=LetterState.REVEALED
 
     def update_state(self, chosen_letter: str) -> bool:
         player_discovered_letter = False
         for letter in self.chosen_word_by_letter_and_state:
-            if chosen_letter == letter[0]:
-                letter[1] = LetterState.REVEALED
+            if chosen_letter == letter[1]:
+                letter[2] = LetterState.REVEALED
                 player_discovered_letter = True
         self.discovered = all(
-            letter[1] == LetterState.REVEALED
+            letter[2] == LetterState.REVEALED
             for letter in self.chosen_word_by_letter_and_state
         )
         return player_discovered_letter  # True if player discovered a letter
-
-    def check_if_discovered(self):
-        pass

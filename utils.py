@@ -1,3 +1,6 @@
+import unicodedata
+
+
 def get_clean_answer(
     text: str, possible_choices: tuple[str, ...], upper: bool = True
 ) -> str:
@@ -11,3 +14,16 @@ def get_clean_answer(
     if upper == True:
         return answer.upper()
     return answer
+
+
+def read_words_file(filepath="lista_palavras.txt") -> tuple[str, ...]:
+    with open(filepath, encoding="utf-8") as file:
+        return tuple(line.strip().strip(",") for line in file if line.strip())
+
+
+def remove_accents(letter: str) -> str:
+    return "".join(
+        character
+        for character in unicodedata.normalize("NFD", letter)
+        if unicodedata.category(character) != "Mn"
+    )

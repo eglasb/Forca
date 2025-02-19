@@ -33,7 +33,7 @@ class Player:
                 self.played_letters.append(chosen_letter)
                 return chosen_letter
 
-    def loose_life(self):
+    def lose_life(self):
         self.lifes -= 1
         if self.lifes == 0:
             self.alive = False
