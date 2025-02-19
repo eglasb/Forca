@@ -1,4 +1,4 @@
-cobra,
+(cobra,
 águia,
 cavalo-marinho,
 chimpanzé,
@@ -45,4 +45,4 @@ abutre,
 gavião,
 corvo,
 falcão,
-condor
+condor)

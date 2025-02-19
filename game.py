@@ -25,9 +25,13 @@ class Game:
     def begin_game(self) -> None:
         self.games_played += 1
         if self.games_played == 1:
+            for _ in range(30):
+                print("\n")
             print("Olá! vamos jogar FORCA?")
             self.player = Player(self.get_name())
         else:
+            for _ in range(30):
+                print("\n")
             print(f"Jogo: {self.games_played}, Vitórias: {self.victories}")
             self.player.reset_state()
             self.secret_word.reset_state()
@@ -44,9 +48,13 @@ class Game:
         hangman_doll.draw_hangman(player.lifes)
         print(secret_word)
         if secret_word.update_state(player.choose_letter()) == False:
+            for _ in range(30):
+                print("\n")
             print("Você errou e perdeu uma vida!")
             player.loose_life()
         else:
+            for _ in range(30):
+                print("\n")
             print("Você acertou uma letra!")
 
     def get_name(self) -> str:

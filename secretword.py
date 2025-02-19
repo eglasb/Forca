@@ -4,7 +4,58 @@ import random
 
 class SecretWord:
     def __init__(self) -> None:
-        self.available_words: tuple[str, ...] = ("oi", "tchau") #, "novamente", "espirro")
+        self.available_words: tuple[str, ...] = (
+            "cobra",
+            "aguia",
+            "cavalo",
+            "marinho",
+            "chimpanze",
+            "escorpiao",
+            "dromedário",
+            "hipopótamo",
+            "tartaruga",
+            "formiga",
+            "crocodilo",
+            "pinguim",
+            "pulga",
+            "gaivota",
+            "baleia",
+            "barata",
+            "girafa",
+            "gorila",
+            "serpente",
+            "mosca",
+            "mosquito",
+            "zebra",
+            "onça",
+            "tigre",
+            "borboleta",
+            "camaleão",
+            "capivara",
+            "beija",
+            "flor",
+            "aranha",
+            "boto",
+            "jiboia",
+            "jacare",
+            "foca",
+            "besouro",
+            "sapo",
+            "tatu",
+            "panda",
+            "sardinha",
+            "peixe",
+            "polvo",
+            "rinoceronte",
+            "hiena",
+            "rouxinol",
+            "andorinha",
+            "abutre",
+            "gaviao",
+            "corvo",
+            "falcao",
+            "condor",
+        )  # , "novamente", "espirro")
         self.chosen_word_by_letter_and_state: list[list]
         self.chosen_words: list[str] = []
         self.discovered: bool = False
@@ -27,8 +78,9 @@ class SecretWord:
             word = (random.choice(self.available_words)).upper()
             if word not in self.chosen_words:
                 self.chosen_words.append(word)
-                print(f"chosen_words: {self.chosen_words}")
                 break
+            print(f"ERRO: Acabaram as palavras! Resetando lista de palavras!")
+            self.chosen_words = []
         self.chosen_word_by_letter_and_state = [
             [letter, LetterState.HIDDEN] for letter in self.chosen_words[-1]
         ]
