@@ -9,6 +9,11 @@ __pycache__/
 # MyPy cache
 .mypy_cache/
 
+# PyInstaller
+build/
+dist/
+*.spec
+
 # Misc
 *.swp
 *.swo
