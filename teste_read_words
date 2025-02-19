@@ -1,0 +1,7 @@
+from utils import read_words_file
+
+
+if __name__ == "__main__":
+    tuple = read_words_file(upper_case=True)
+
+    print(tuple)

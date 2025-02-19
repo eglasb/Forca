@@ -16,8 +16,10 @@ def get_clean_answer(
     return answer
 
 
-def read_words_file(filepath="lista_palavras.txt") -> tuple[str, ...]:
+def read_words_file(filepath="lista_palavras.txt", upper_case:bool = True) -> tuple[str, ...]:
     with open(filepath, encoding="utf-8") as file:
+        if upper_case == True:
+            return tuple(line.strip().strip(",").upper() for line in file if line.strip())
         return tuple(line.strip().strip(",") for line in file if line.strip())
 
 

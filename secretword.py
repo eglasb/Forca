@@ -24,20 +24,20 @@ class SecretWord:
 
     def choose_secret_word(self):
         print("Sorteando palavra! **BZZZZ BZZZZ BZZZZ**")
-        while True:
-            word = (random.choice(self.available_words)).upper()
-            if word not in self.chosen_words:
-                self.chosen_words.append(word)
-                break
-            print(f"ERRO: Acabaram as palavras! Resetando lista de palavras!")
+        if len(self.chosen_words) == len(self.available_words):
+            print(f"ERRO: acabaram as palavras. Resetando lista...")
             self.chosen_words = []
+        word = random.choice(
+            [unused_words for unused_words in self.available_words if unused_words not in self.chosen_words]
+        )
+        self.chosen_words.append(word)
         self.chosen_word_by_letter_and_state = [
             [letter, remove_accents(letter), LetterState.HIDDEN]
             for letter in self.chosen_words[-1]
         ]
         for letter in self.chosen_word_by_letter_and_state:
-            if letter[0]=="-":
-                letter[2]=LetterState.REVEALED
+            if letter[0] == "-":
+                letter[2] = LetterState.REVEALED
 
     def update_state(self, chosen_letter: str) -> bool:
         player_discovered_letter = False

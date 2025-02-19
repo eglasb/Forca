@@ -13,7 +13,7 @@ class Game:
         self.played_words: list[str] = []
         self.victories: int = 0
         self.games_played: int = 0
-        self.secret_word: SecretWord = SecretWord(read_words_file())
+        self.secret_word: SecretWord = SecretWord(read_words_file(upper_case=True))
 
     # Só para testes
     def testa_player(self) -> None:

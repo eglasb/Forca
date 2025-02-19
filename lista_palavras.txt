@@ -1,4 +1,5 @@
-(cobra,
+macaco-prego
+cobra,
 águia,
 cavalo-marinho,
 chimpanzé,
@@ -45,4 +46,12 @@ abutre,
 gavião,
 corvo,
 falcão,
-condor
+condor,
+tamanduá-bandeira,
+leão-marinho,
+mico-leão-dourado,
+Papa-léguas,
+elefante,
+Rinoceronte,
+Hipopótamo,
+Ornitorrinco
