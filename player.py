@@ -10,7 +10,7 @@ class Player:
     def __init__(self, name) -> None:
         self.name: str = name
         self.lifes: int = 6
-        self.played_letters: list = []
+        self.played_letters: list[str] = []
         self.chosen_letter: str = ""
         self.alive: bool = True
 
