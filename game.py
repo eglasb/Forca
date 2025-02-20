@@ -26,14 +26,14 @@ class Game:
             self.secret_word.reset_state()
         self.secret_word.choose_secret_word()
         print(f"Ok {self.player.name}, vamos lá!!")
-        while self.player.lifes > 0 and self.secret_word.discovered == False:
+        while self.player.lives > 0 and self.secret_word.discovered == False:
             self.next_turn(self.player, self.hangman_doll, self.secret_word)
         self.end_game()
 
     def next_turn(
         self, player: "Player", hangman_doll: "HangmanDoll", secret_word: "SecretWord"
     ):
-        hangman_doll.draw_hangman(player.lifes)
+        hangman_doll.draw_hangman(player.lives)
         print(secret_word)
         if player.played_letters != []:
             print(f"Letras já tentadas: ", end="")
@@ -52,8 +52,8 @@ class Game:
         return input("Qual o seu nome? ").strip().title()
 
     def end_game(self):
-        if self.player.lifes == 0:
-            self.hangman_doll.draw_hangman(self.player.lifes)
+        if self.player.lives == 0:
+            self.hangman_doll.draw_hangman(self.player.lives)
             print("Você morreu!")
             print(f"A palavra secreta era: {self.secret_word.chosen_words[-1]}!")
         else:
