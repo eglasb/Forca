@@ -1,6 +1,5 @@
 from hangmandoll import HangmanDoll
 from player import Player
-from letterstate import LetterState
 from secretword import SecretWord
 from utils import get_clean_answer, read_words_file, clear_screen
 

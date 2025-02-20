@@ -1,4 +1,3 @@
-import random
 from utils import remove_accents
 
 class Player:
