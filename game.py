@@ -14,12 +14,6 @@ class Game:
         self.games_played: int = 0
         self.secret_word: SecretWord = SecretWord(read_words_file(upper_case=True))
 
-    # Só para testes
-    def testa_player(self) -> None:
-        print(self.player)
-
-    # Pega nome e cria Player,
-    # sorteia palavra e chama next_turn() até zerar as vidas
     def begin_game(self) -> None:
         self.games_played += 1
         if self.games_played == 1:
@@ -45,8 +39,8 @@ class Game:
         if player.played_letters != []:
             print(f"Letras já tentadas: ", end="")
             for letter in player.played_letters:
-                print(letter,end=" ")     
-            print("")          
+                print(letter, end=" ")
+            print("")
         if secret_word.update_state(player.choose_letter()) == False:
             clear_screen()
             print("Você errou e perdeu uma vida!")
