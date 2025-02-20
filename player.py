@@ -1,5 +1,6 @@
 from utils import remove_accents
 
+
 class Player:
     # fmt: off
     LETTERS: tuple[str, ...] = ("A", "B", "C", "D", "E", "F", "G", "H", "I", "J", "K",
@@ -8,13 +9,13 @@ class Player:
     # fmt: on
     def __init__(self, name) -> None:
         self.name: str = name
-        self.lifes: int = 6
+        self.lives: int = 6
         self.played_letters: list[str] = []
         self.chosen_letter: str = ""
         self.alive: bool = True
 
     def __repr__(self) -> str:
-        return f"Player: {self.name} has {self.lifes} lifes."
+        return f"Player: {self.name} has {self.lives} lifes."
 
     def choose_letter(self) -> str:
         chosen_letter = remove_accents(input("Escolha uma letra: ").upper().strip())
@@ -33,12 +34,12 @@ class Player:
                 return chosen_letter
 
     def lose_life(self):
-        self.lifes -= 1
-        if self.lifes == 0:
+        self.lives -= 1
+        if self.lives == 0:
             self.alive = False
 
     def reset_state(self):
-        self.lifes = 6
+        self.lives = 6
         self.played_letters = []
         self.chosen_letter = ""
         self.alive = True
